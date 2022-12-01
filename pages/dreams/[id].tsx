@@ -1,59 +1,41 @@
-import { Footer } from "@components/footer";
 import { DefaultLayout } from "@components/layouts/defaultLayout";
-import { Navbar } from "@components/navbar/navbar";
 import { useClaimConditions, useContract, useNFT } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 import React from "react";
 import { DREAMS_COME_TRUE_EDITION_ADDRESS } from "src/utils/const";
 import { revenueProgressFromClaimCondition } from "src/utils/helpers";
-import styles from "../page.module.css";
-import Image from "next/image";
 import ProgressBar from "@components/progress/progress";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
+import { ItemImage } from "@components/item-image/item-image.component";
+import { useCartStore } from "src/store/cart.store";
+import { HorizontalDivider } from "@components/divider/horizontal-divider.component";
 
 const DreamItemPage: NextPageWithLayout = () => {
     const router = useRouter();
     const tokenId = router.query.id as string;
     const { contract } = useContract(DREAMS_COME_TRUE_EDITION_ADDRESS);
-    const {
-        data: item,
-        isLoading: isItemLoading,
-        error: itemError,
-    } = useNFT(contract as any, tokenId);
-    const { data: claimConditions, isLoading } = useClaimConditions(
-        contract as any,
-        tokenId,
-    );
-    const initialClaimCondition = claimConditions?.[0];
-    const revenueProgress =
-        initialClaimCondition &&
-        revenueProgressFromClaimCondition(initialClaimCondition);
+    const { data: item } = useNFT(contract as any, tokenId);
+    const { setItem } = useCartStore();
 
+    const onClaim = () => {
+        setItem({ item, itemContract: contract });
+        router.push("/claim/");
+    };
     return (
         <div className="grid grid-cols-2 divide-x divide-gray-600 h-full">
-            <div className="w-full p-4">
-                <div className="flex justify-center items-center w-[100%] h-full bg-gray-300 rounded  dark:bg-gray-600 relative">
-                    {!isItemLoading && (
-                        <Image
-                            className="rounded-sm"
-                            src={item?.metadata?.image}
-                            alt={"NFT"}
-                            layout="fill"
-                            objectFit="cover"
-                            objectPosition="top center"
-                            placeholder="empty"
-                        />
-                    )}
-                    <svg
-                        className="w-12 h-12 text-gray-200"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                        fill="currentColor"
-                        viewBox="0 0 640 512"
+            <div className="w-full p-4 h-full flex flex-col">
+                <ItemImage
+                    src={item?.metadata.image}
+                    alt="image_cover"
+                ></ItemImage>
+                <div className="pt-4">
+                    <button
+                        onClick={() => onClaim()}
+                        className="border border-white w-full h-20 text-2xl"
                     >
-                        <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
-                    </svg>
+                        Купить
+                    </button>
                 </div>
             </div>
             <DreamDetails></DreamDetails>
@@ -65,11 +47,10 @@ const DreamDetails = () => {
     const router = useRouter();
     const tokenId = router.query.id as string;
     const { contract } = useContract(DREAMS_COME_TRUE_EDITION_ADDRESS);
-    const {
-        data: item,
-        isLoading: isItemLoading,
-        error: itemError,
-    } = useNFT(contract as any, tokenId);
+    const { data: item, isLoading: isItemLoading } = useNFT(
+        contract as any,
+        tokenId,
+    );
     const { data: claimConditions, isLoading: isClaimConditionsLoading } =
         useClaimConditions(contract as any, tokenId);
     const initialClaimCondition = claimConditions?.[0];
@@ -141,12 +122,12 @@ const DreamDetails = () => {
                     <div className=" min-h-[250px]">{renderTitle()}</div>
                     <div className="pt-4">
                         <p className="font-display text-4xl">Количество</p>
-                        <div className="w-full border-b border-gray-600 my-4"></div>
+                        <HorizontalDivider className="my-4"></HorizontalDivider>
                         {renderProgress()}
                     </div>
                     <div className="pt-4">
                         <p className="font-display text-4xl">Описание</p>
-                        <div className="w-full border-b border-gray-600 my-4"></div>
+                        <HorizontalDivider className="my-4"></HorizontalDivider>
                         {renderDescription()}
                     </div>
                 </div>
@@ -163,17 +144,6 @@ const DreamDetails = () => {
     );
 };
 
-DreamItemPage.getLayout = (page) => (
-    <>
-        <div
-            className={
-                styles.pageContainer + "  divide-y divide-solid divide-gray-600"
-            }
-        >
-            <Navbar className="h-full" />
-            <main className="bg-black h-full text-white">{page}</main>
-        </div>
-    </>
-);
+DreamItemPage.getLayout = DefaultLayout;
 
 export default DreamItemPage;

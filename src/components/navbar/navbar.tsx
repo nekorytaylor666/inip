@@ -1,7 +1,10 @@
 import { useAddress } from "@thirdweb-dev/react";
+import Link from "next/link";
 import React from "react";
 import Logo from "src/icon-components/Logo";
 import { useMagicStore } from "src/store/magic.store";
+import styles from "./navbar.module.css";
+
 export const Navbar: React.FC<{ className?: string }> = (props) => {
     const { className } = props;
     const { magicProvider, magic } = useMagicStore();
@@ -15,26 +18,27 @@ export const Navbar: React.FC<{ className?: string }> = (props) => {
         <div>
             <nav
                 className={
-                    "flex justify-center bg-black backdrop-blur-md w-full " +
+                    "flex justify-center bg-[#131313] backdrop-blur-md w-full " +
                     className
                 }
             >
-                <div className="flex w-full justify-between py-2 px-8">
+                <div className={styles.navbarContainer + " w-full py-2 px-8"}>
                     <div className="items-center hidden lg:flex">
-                        <a
+                        <Link
+                            href="/"
                             className="flex text-white hover:text-gray-500
                     cursor-pointer transition-colors duration-300"
                         >
                             Список товаров
-                        </a>
+                        </Link>
                     </div>
                     <div className="flex items-center">
-                        <a className="cursor-pointer">
+                        <Link href={"/"} className="cursor-pointer">
                             <Logo />
-                        </a>
+                        </Link>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center w-full justify-end gap-4">
                         <a
                             className="flex text-white hover:text-gray-500
                     cursor-pointer transition-colors duration-300"

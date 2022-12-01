@@ -1,46 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { Container, Header, Main, Footer, Cards } from "@components";
-import {
-    useAddress,
-    useContract,
-    useDisconnect,
-    useSDK,
-} from "@thirdweb-dev/react";
-import { useMagic } from "@thirdweb-dev/react/evm/connectors/magic";
-import { Magic } from "magic-sdk";
-import { ConnectExtension } from "@magic-ext/connect";
-import { magicLinkWalletConnector } from "src/utils/magiclinkConnector";
-import { useMagicStore } from "src/store/magic.store";
+import { useContract, useNFTs } from "@thirdweb-dev/react";
+import { NextPageWithLayout } from "./_app";
+import { Navbar } from "@components/navbar/navbar";
+import styles from "./page.module.css";
+import { DREAMS_COME_TRUE_EDITION_ADDRESS } from "src/utils/const";
+import { ItemImage } from "@components/item-image/item-image.component";
+import Link from "next/link";
 
-const styles = {} as any;
-const Home: React.FC = () => {
-    const { magic, magicProvider } = useMagicStore();
-    const [email, setEmail] = useState<string>(""); // State to hold the email address the user entered.
-    const { contract } = useContract(
-        "0x4e43D67e37d43c71a6DD3Dc07B292449c2a56E5d",
-        "edition-drop",
-    );
+const HomePage: NextPageWithLayout = () => {
+    const { contract } = useContract(DREAMS_COME_TRUE_EDITION_ADDRESS);
+    const {
+        data: items,
+        isLoading: isItemsLoading,
+        error: itemsError,
+    } = useNFTs(contract as any);
 
-    const address = useAddress();
-    const login = async () => {
-        magicProvider.listAccounts().then((accounts) => {
-            console.log(accounts);
-        });
-    };
-    const claim = async () => {
-        console.log(address);
-    };
     return (
         <>
-            <div className={styles.container}>
-                <h1 className={styles.h1}>thirdweb + Magic.Link</h1>
-                <p>address:{address}</p>
-                <button onClick={() => login()}>connect</button>
-                <button onClick={() => claim()}>Claim</button>
+            <div className="grid grid-cols-3 p-4 gap-4">
+                {items?.map((item) => (
+                    <Link href={"/dreams/" + item?.metadata.id}>
+                        <div className=" p-3 bg-black">
+                            <div className="h-[580px] w-full">
+                                <ItemImage
+                                    src={item.metadata.image}
+                                    alt={"nft-cover"}
+                                ></ItemImage>
+                            </div>
+
+                            <p className=" font-display text-5xl mt-4 truncate">
+                                {item.metadata.name}
+                            </p>
+                        </div>
+                    </Link>
+                ))}
             </div>
         </>
     );
 };
 
-export default Home;
+HomePage.getLayout = (page) => (
+    <>
+        <div
+            className={
+                styles.pageContainer +
+                "  divide-y divide-solid divide-gray-600 "
+            }
+        >
+            <Navbar className="h-full" />
+            <main className="bg-[#131313] h-full text-white">{page}</main>
+        </div>
+    </>
+);
+
+export default HomePage;

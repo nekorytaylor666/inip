@@ -20,6 +20,7 @@ import { ConnectExtension } from "@magic-ext/connect";
 import Web3 from "web3";
 import { ethers } from "ethers";
 import { MagicConnect, useMagicStore } from "src/store/magic.store";
+import { Toaster } from "react-hot-toast";
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<
     P,
@@ -104,6 +105,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout): JSX.Element {
                         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                         {/* @ts-ignore */}
                         {getLayout(<Component {...pageProps} />)}
+                        <Toaster />
                     </main>
                 </ThirdwebSDKProvider>
             </Hydrate>
