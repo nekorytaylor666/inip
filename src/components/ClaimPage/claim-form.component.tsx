@@ -3,6 +3,7 @@ import { ItemImage } from "@components/item-image/item-image.component";
 import { ClaimCondition, NFT } from "@thirdweb-dev/sdk";
 import { ethers } from "ethers";
 import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { CRYPTO_ICONS, AvailableCoins } from "src/utils/crypto-icons";
 
 interface ClaimFormProps {
@@ -24,7 +25,18 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
     const currencyIcon =
         !isClaimConditionsLoading &&
         CRYPTO_ICONS[claimCondition.currencyMetadata.symbol as AvailableCoins];
-    const [quantity, setQuantity] = useState(1);
+
+    const { register, handleSubmit, control } = useForm();
+    const quantity = useWatch({
+        control,
+        name: "quantity",
+        defaultValue: "1",
+    });
+
+    const onSubmitClaimForm = handleSubmit(async (values) => {
+        await onClaim(Number.parseInt(values.quantity));
+    });
+
     const renderPrice = () => {
         if (isClaimConditionsLoading) {
             return <div className="animate-pulse">Loading...</div>;
@@ -68,18 +80,36 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
                         <HorizontalDivider className="my-8"></HorizontalDivider>
                         {renderPrice()}
                         <HorizontalDivider className="my-8"></HorizontalDivider>
-
-                        <button
-                            disabled={isClaimLoading}
-                            onClick={() => onClaim(quantity)}
-                            className={` bg-[#1A1A1A] w-full h-14 rounded-md ${
-                                isClaimLoading
-                                    ? " opacity-50 animate-pulse cursor-not-allowed "
-                                    : ""
-                            }`}
-                        >
-                            {isClaimLoading ? "Загрузка... " : "Продолжить"}
-                        </button>
+                        <form onSubmit={onSubmitClaimForm}>
+                            <div className="flex items-center w-full gap-4">
+                                <input
+                                    className={`w-1/3 h-14 rounded-md bg-[#1A1A1A] px-4 ${
+                                        isClaimLoading
+                                            ? " opacity-50 animate-pulse cursor-not-allowed "
+                                            : ""
+                                    }`}
+                                    type="number"
+                                    disabled={isClaimLoading}
+                                    placeholder="Amount of items"
+                                    min={1}
+                                    max={claimCondition?.availableSupply}
+                                    {...register("quantity", { value: "1" })}
+                                />
+                                <button
+                                    disabled={isClaimLoading}
+                                    onClick={() => onClaim(quantity)}
+                                    className={` bg-[#1A1A1A] w-full h-14 rounded-md ${
+                                        isClaimLoading
+                                            ? " opacity-50 animate-pulse cursor-not-allowed "
+                                            : ""
+                                    }`}
+                                >
+                                    {isClaimLoading
+                                        ? "Загрузка... "
+                                        : "Продолжить"}
+                                </button>
+                            </div>
+                        </form>
                     </div>
                     <div className="">
                         <div className=" w-[450px] h-[500px]">
