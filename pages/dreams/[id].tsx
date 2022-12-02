@@ -20,7 +20,7 @@ const DreamItemPage: NextPageWithLayout = () => {
 
     const onClaim = () => {
         setItem({ item, itemContract: contract });
-        router.push("/claim/");
+        router.push("/checkout/");
     };
     return (
         <div className="grid grid-cols-2 divide-x divide-gray-600 h-full">
@@ -84,15 +84,15 @@ const DreamDetails = () => {
         return (
             <div className="w-full">
                 <ProgressBar
-                    value={revenueProgress.currentRevenue}
-                    max={revenueProgress.maxRevenue}
+                    value={revenueProgress?.revenuePercent}
+                    max={100}
                 ></ProgressBar>
                 <div className="flex justify-between w-full items-center mt-2">
                     <span className="text-white-400 text-sm">
-                        {revenueProgress.currentRevenue}
+                        {revenueProgress.currentSupply}
                     </span>
                     <span className="text-white-400 text-sm">
-                        {revenueProgress.maxRevenue}
+                        {revenueProgress.availalbesSupply}
                     </span>
                 </div>
             </div>

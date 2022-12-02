@@ -13,7 +13,7 @@ interface ClaimFormProps {
     item: NFT;
 }
 
-export const ClaimForm = (props: ClaimFormProps): JSX.Element => {
+export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
     const {
         item,
         isClaimLoading,

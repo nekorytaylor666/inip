@@ -39,12 +39,13 @@ export const Navbar: React.FC<{ className?: string }> = (props) => {
                     </div>
 
                     <div className="flex items-center w-full justify-end gap-4">
-                        <a
+                        <Link
+                            href="/profile"
                             className="flex text-white hover:text-gray-500
                     cursor-pointer transition-colors duration-300"
                         >
                             Профиль
-                        </a>
+                        </Link>
                         {address ? (
                             <button
                                 onClick={() => magic.connect.showWallet()}

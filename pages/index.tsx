@@ -2,11 +2,11 @@ import React from "react";
 
 import { useContract, useNFTs } from "@thirdweb-dev/react";
 import { NextPageWithLayout } from "./_app";
-import { Navbar } from "@components/navbar/navbar";
-import styles from "./page.module.css";
 import { DREAMS_COME_TRUE_EDITION_ADDRESS } from "src/utils/const";
 import { ItemImage } from "@components/item-image/item-image.component";
 import Link from "next/link";
+import { DefaultLayout } from "@components/layouts/defaultLayout";
+import { SkeletonGridComponent } from "@components/skeletons/skeleton-grid.component";
 
 const HomePage: NextPageWithLayout = () => {
     const { contract } = useContract(DREAMS_COME_TRUE_EDITION_ADDRESS);
@@ -17,8 +17,9 @@ const HomePage: NextPageWithLayout = () => {
     } = useNFTs(contract as any);
 
     return (
-        <>
-            <div className="grid grid-cols-3 p-4 gap-4">
+        <div className="p-8 ">
+            {isItemsLoading && <SkeletonGridComponent></SkeletonGridComponent>}
+            <div className="grid grid-cols-3 gap-8">
                 {items?.map((item) => (
                     <Link href={"/dreams/" + item?.metadata.id}>
                         <div className=" p-3 bg-black">
@@ -36,22 +37,10 @@ const HomePage: NextPageWithLayout = () => {
                     </Link>
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 
-HomePage.getLayout = (page) => (
-    <>
-        <div
-            className={
-                styles.pageContainer +
-                "  divide-y divide-solid divide-gray-600 "
-            }
-        >
-            <Navbar className="h-full" />
-            <main className="bg-[#131313] h-full text-white">{page}</main>
-        </div>
-    </>
-);
+HomePage.getLayout = DefaultLayout;
 
 export default HomePage;
