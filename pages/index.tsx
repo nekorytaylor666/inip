@@ -21,7 +21,7 @@ const HomePage: NextPageWithLayout = () => {
             {isItemsLoading && <SkeletonGridComponent></SkeletonGridComponent>}
             <div className="grid grid-cols-3 gap-8">
                 {items?.map((item) => (
-                    <Link href={"/dreams/" + item?.metadata.id}>
+                    <Link href={"/nft/" + item?.metadata.id}>
                         <div className=" p-3 bg-black">
                             <div className="h-[580px] w-full">
                                 <ItemImage

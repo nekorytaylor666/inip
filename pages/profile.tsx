@@ -33,9 +33,7 @@ const Profile = () => {
                 </button> */}
             </div>
             <div className="pt-8">
-                <h3 className="font-display text-6xl mb-8">
-                    INIP: Food packages
-                </h3>
+                <h3 className="font-display text-6xl mb-8">INIP: NFT-ТОВАРЫ</h3>
                 <HorizontalDivider className="my-4"></HorizontalDivider>
                 {isDreamsLoading && (
                     <SkeletonGridComponent quantity={3}></SkeletonGridComponent>
