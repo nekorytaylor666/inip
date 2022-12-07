@@ -50,9 +50,11 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
                         src={currencyIcon}
                         alt="currency"
                     />
-                    <span className=" text-lg lg:text-2xl">Цена покупки</span>
+                    <span className=" text-base w-1/3 lg-w-full lg:text-2xl">
+                        Цена покупки
+                    </span>
                 </div>
-                <span className="text-6xl  font-display uppercase">
+                <span className="text-4xl lg:text-6xl  font-display uppercase">
                     {quantity &&
                         ethers.utils.formatUnits(
                             claimCondition.price.mul(
@@ -60,7 +62,7 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
                             ),
                             claimCondition.currencyMetadata.decimals,
                         )}
-                    <span className="ml-4">
+                    <span className="text-xl lg:text-4xl ml-4">
                         {claimCondition.currencyMetadata.symbol}
                     </span>
                 </span>
