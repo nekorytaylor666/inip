@@ -43,18 +43,18 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
         }
 
         return (
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
                 <div className="flex gap-4 items-center">
                     <img
                         className="h-12 w-12 lg:w-16 lg:h-16"
                         src={currencyIcon}
                         alt="currency"
                     />
-                    <span className=" text-base w-1/3 lg-w-full lg:text-2xl">
+                    <span className=" text-base w-full lg:text-2xl">
                         Цена покупки
                     </span>
                 </div>
-                <span className="text-4xl lg:text-6xl  font-display uppercase">
+                <span className="text-6xl  font-display uppercase">
                     {quantity &&
                         ethers.utils.formatUnits(
                             claimCondition.price.mul(
@@ -62,7 +62,7 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
                             ),
                             claimCondition.currencyMetadata.decimals,
                         )}
-                    <span className="text-xl lg:text-4xl ml-4">
+                    <span className=" ml-4">
                         {claimCondition.currencyMetadata.symbol}
                     </span>
                 </span>
@@ -77,7 +77,7 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
                         <h1 className=" font-display text-7xl lg:text-8xl">
                             Покупка NFT
                         </h1>
-                        <p className="mt-4 text-base lg:text-lg w-2/3">
+                        <p className="mt-4 text-base lg:text-lg w-full lg:w-2/3">
                             После подтверждения транзакции NFT будет отправлен
                             вам в кошелек
                         </p>
@@ -116,13 +116,13 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
                         </form>
                     </div>
                     <div className="">
-                        <div className="w-full h-[500px]">
+                        <div className="w-full lg:h-[500px] h-72">
                             <ItemImage
                                 src={item.metadata.image}
                                 alt="nft"
                             ></ItemImage>
                         </div>
-                        <p className="font-display text-4xl p-4 border border-gray-600 border-t-0 ">
+                        <p className="font-display text-2xl lg:text-4xl p-4 border border-gray-600 border-t-0 ">
                             {item.metadata.name}
                         </p>
                     </div>
