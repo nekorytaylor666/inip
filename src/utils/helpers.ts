@@ -2,7 +2,7 @@ import { ClaimCondition } from "@thirdweb-dev/sdk";
 import { ethers } from "ethers";
 
 export const truncateString = (str: string, num: number) => {
-    if (str.length > num) {
+    if (str?.length > num) {
         return str.slice(0, num) + "...";
     }
     return str;
