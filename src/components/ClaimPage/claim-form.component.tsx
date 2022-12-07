@@ -46,13 +46,13 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
             <div className="flex justify-between items-center">
                 <div className="flex gap-4 items-center">
                     <img
-                        className=" w-16 h-16"
+                        className="h-12 w-12 lg:w-16 lg:h-16"
                         src={currencyIcon}
                         alt="currency"
                     />
-                    <span className=" text-2xl">Цена покупки</span>
+                    <span className=" text-lg lg:text-2xl">Цена покупки</span>
                 </div>
-                <span className="text-6xl font-display uppercase">
+                <span className="text-6xl  font-display uppercase">
                     {quantity &&
                         ethers.utils.formatUnits(
                             claimCondition.price.mul(
@@ -68,12 +68,14 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
         );
     };
     return (
-        <div className="flex items-center justify-center h-full">
+        <div className="flex  items-center justify-center h-full">
             <div className=" container max-w-5xl">
-                <div className="w-full flex gap-8">
+                <div className="w-full grid grid-cols-1 lg:grid-cols-2 p-4 lg:p-8 gap-8">
                     <div className="w-full">
-                        <h1 className=" font-display text-8xl">Покупка NFT</h1>
-                        <p className="mt-4 text-lg w-2/3">
+                        <h1 className=" font-display text-7xl lg:text-8xl">
+                            Покупка NFT
+                        </h1>
+                        <p className="mt-4 text-base lg:text-lg w-2/3">
                             После подтверждения транзакции NFT будет отправлен
                             вам в кошелек
                         </p>
@@ -112,7 +114,7 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
                         </form>
                     </div>
                     <div className="">
-                        <div className=" w-[450px] h-[500px]">
+                        <div className="w-full h-[500px]">
                             <ItemImage
                                 src={item.metadata.image}
                                 alt="nft"

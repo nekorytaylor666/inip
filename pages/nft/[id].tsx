@@ -23,8 +23,8 @@ const DreamItemPage: NextPageWithLayout = () => {
         router.push("/checkout/");
     };
     return (
-        <div className="grid grid-cols-2 divide-x divide-gray-600 h-full">
-            <div className="w-full p-4 h-full flex flex-col">
+        <div className="grid grid-cols-1 lg:grid-cols-2 divide-x divide-gray-600 h-full">
+            <div className="w-full p-4 h-[500px] lg:h-full flex flex-col">
                 <ItemImage
                     src={item?.metadata.image}
                     alt="image_cover"
@@ -32,7 +32,7 @@ const DreamItemPage: NextPageWithLayout = () => {
                 <div className="pt-4">
                     <button
                         onClick={() => onClaim()}
-                        className="border border-white w-full h-20 text-2xl"
+                        className={`bg-[#1A1A1A] w-full h-14 rounded-md`}
                     >
                         Купить
                     </button>
@@ -68,7 +68,9 @@ const DreamDetails = () => {
             );
         }
         return (
-            <h1 className="font-display text-8xl py-4">{item.metadata.name}</h1>
+            <h1 className="font-display text-4xl lg:text-8xl py-4">
+                {item.metadata.name}
+            </h1>
         );
     };
 
@@ -116,10 +118,43 @@ const DreamDetails = () => {
         );
     };
     return (
-        <ScrollArea.Root>
-            <ScrollArea.Viewport className="h-[90vh]">
-                <div className="p-10">
-                    <div className=" min-h-[250px]">{renderTitle()}</div>
+        <>
+            <div className="hidden lg:block">
+                <ScrollArea.Root>
+                    <ScrollArea.Viewport className="h-[90vh]">
+                        <div className="p-10">
+                            <div className=" min-h-[250px]">
+                                {renderTitle()}
+                            </div>
+                            <div className="pt-4">
+                                <p className="font-display text-4xl">
+                                    Количество
+                                </p>
+                                <HorizontalDivider className="my-4"></HorizontalDivider>
+                                {renderProgress()}
+                            </div>
+                            <div className="pt-4">
+                                <p className="font-display text-4xl">
+                                    Описание
+                                </p>
+                                <HorizontalDivider className="my-4"></HorizontalDivider>
+                                {renderDescription()}
+                            </div>
+                        </div>
+                    </ScrollArea.Viewport>
+                    <ScrollArea.Scrollbar orientation="horizontal">
+                        <ScrollArea.Thumb />
+                    </ScrollArea.Scrollbar>
+                    <ScrollArea.Scrollbar orientation="vertical">
+                        <ScrollArea.Thumb />
+                    </ScrollArea.Scrollbar>
+
+                    <ScrollArea.Corner />
+                </ScrollArea.Root>
+            </div>
+            <div className="block lg:hidden">
+                <div className="p-4 lg:p-10">
+                    <div className=" lg:min-h-[250px]">{renderTitle()}</div>
                     <div className="pt-4">
                         <p className="font-display text-4xl">Количество</p>
                         <HorizontalDivider className="my-4"></HorizontalDivider>
@@ -131,16 +166,8 @@ const DreamDetails = () => {
                         {renderDescription()}
                     </div>
                 </div>
-            </ScrollArea.Viewport>
-            <ScrollArea.Scrollbar orientation="horizontal">
-                <ScrollArea.Thumb />
-            </ScrollArea.Scrollbar>
-            <ScrollArea.Scrollbar orientation="vertical">
-                <ScrollArea.Thumb />
-            </ScrollArea.Scrollbar>
-
-            <ScrollArea.Corner />
-        </ScrollArea.Root>
+            </div>
+        </>
     );
 };
 

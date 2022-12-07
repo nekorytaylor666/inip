@@ -1,7 +1,7 @@
 import React from "react";
 import { useClaimConditions, useClaimNFT } from "@thirdweb-dev/react";
 import { NextPageWithLayout } from "./_app";
-import { Navbar } from "@components/navbar/navbar";
+import { DesktopNavbarComponent } from "@components/navbar/navbar";
 import styles from "./page.module.css";
 import { useCartStore } from "src/store/cart.store";
 import toast from "react-hot-toast";

@@ -1,4 +1,4 @@
-import { Navbar } from "@components/navbar/navbar";
+import { DesktopNavbarComponent } from "@components/navbar/navbar";
 import { useAddress, useContract, useOwnedNFTs } from "@thirdweb-dev/react";
 import React from "react";
 import { DREAMS_COME_TRUE_EDITION_ADDRESS } from "src/utils/const";
