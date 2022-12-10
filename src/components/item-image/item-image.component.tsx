@@ -2,7 +2,7 @@ import React from "react";
 import Image, { ImageProps } from "next/image";
 export const ItemImage = (props: ImageProps) => {
     return (
-        <div className="flex justify-center items-center w-[100%] h-full bg-gray-300   dark:bg-gray-600 relative">
+        <div className="flex justify-center items-center w-full aspect-square bg-gray-300   dark:bg-gray-600 relative">
             {props.src && (
                 <Image
                     className="rounded-sm"
