@@ -2,6 +2,8 @@ import { DesktopNavbarComponent } from "@components/navbar/navbar";
 import {
     useAddress,
     useContract,
+    useDisconnect,
+    useLogout,
     useNFTs,
     useOwnedNFTs,
 } from "@thirdweb-dev/react";
@@ -15,18 +17,24 @@ import { SkeletonGridComponent } from "@components/skeletons/skeleton-grid.compo
 import Link from "next/link";
 import { HorizontalDivider } from "@components/divider/horizontal-divider.component";
 import { truncateString } from "src/utils/helpers";
+import { useMagicStore } from "src/store/magic.store";
 const Profile = () => {
     const walletAddress = useAddress();
     console.log(!!walletAddress);
-    const { contract } = useContract(DREAMS_COME_TRUE_EDITION_ADDRESS);
+    const { magic } = useMagicStore();
 
+    const onLogout = () => {
+        magic.connect.disconnect().then(() => {
+            window.location.reload();
+        });
+    };
+    const { contract } = useContract(DREAMS_COME_TRUE_EDITION_ADDRESS);
     const { data: dreams, isLoading: isDreamsLoading } = useOwnedNFTs(
         contract,
         walletAddress,
     );
     return (
         <div className="p-4 lg:p-8">
-            {/* create full width container with address and log out button with white border and full border radius  */}
             <div className="p-8 lg:p-16 border rounded-2xl lg:rounded-full border-white flex justify-between items-center ">
                 <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                     <svg
@@ -50,9 +58,12 @@ const Profile = () => {
                         {walletAddress}
                     </p>
                 </div>
-                {/* <button className=" h-80 w-80 border border-white rounded-full">
+                <button
+                    onClick={onLogout}
+                    className=" h-80 w-80 border border-white rounded-full"
+                >
                     Выйти
-                </button> */}
+                </button>
             </div>
             <div className="pt-8">
                 <h3 className="font-display text-4xl lg:text-6xl mb-8">
