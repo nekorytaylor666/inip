@@ -15,6 +15,7 @@
         "@magic-ext/connect": "^3.1.0",
         "@next/font": "^13.0.4",
         "@radix-ui/colors": "^0.1.8",
+        "@radix-ui/react-dialog": "^1.0.2",
         "@radix-ui/react-navigation-menu": "^1.1.1",
         "@radix-ui/react-progress": "^1.0.1",
         "@radix-ui/react-scroll-area": "^1.0.2",

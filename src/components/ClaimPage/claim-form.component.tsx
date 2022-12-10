@@ -116,12 +116,10 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
                         </form>
                     </div>
                     <div className="">
-                        <div className="w-full lg:h-[500px] h-72">
-                            <ItemImage
-                                src={item.metadata.image}
-                                alt="nft"
-                            ></ItemImage>
-                        </div>
+                        <ItemImage
+                            src={item.metadata.image}
+                            alt="nft"
+                        ></ItemImage>
                         <p className="font-display text-2xl lg:text-4xl p-4 border border-gray-600 border-t-0 ">
                             {item.metadata.name}
                         </p>

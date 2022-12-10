@@ -23,8 +23,8 @@ const DreamItemPage: NextPageWithLayout = () => {
         router.push("/checkout/");
     };
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 divide-x divide-gray-600 h-full">
-            <div className="w-full p-4 h-[500px] lg:h-full flex flex-col">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:divide-x lg:divide-gray-600 h-full">
+            <div className="w-full p-4  flex flex-col">
                 <ItemImage
                     src={item?.metadata.image}
                     alt="image_cover"
