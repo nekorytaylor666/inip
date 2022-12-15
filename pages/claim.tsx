@@ -36,9 +36,10 @@ const ClaimPage: NextPageWithLayout = () => {
 };
 
 const ClaimFormContainer = () => {
+    const [isClaimLoading, setIsClaimLoading] = useState(false);
     return (
         <>
-            {/* <div className="flex items-center justify-center h-full">
+            <div className="flex items-center justify-center h-full">
                 <div className=" container max-w-5xl">
                     <div className="w-full flex gap-8">
                         <div className="w-full">
@@ -54,7 +55,7 @@ const ClaimFormContainer = () => {
 
                             <button
                                 disabled={isClaimLoading}
-                                className={` bg-[#1A1A1A] w-full h-14 rounded-md ${
+                                className={` bg-brand-black w-full h-14 rounded-md ${
                                     isClaimLoading
                                         ? " opacity-50 animate-pulse cursor-not-allowed "
                                         : ""
@@ -65,18 +66,18 @@ const ClaimFormContainer = () => {
                         </div>
                         <div className="">
                             <div className=" w-[450px] h-[500px]">
-                                <ItemImage
+                                {/* <ItemImage
                                     src={itemToClaim.metadata.image}
                                     alt="nft"
-                                ></ItemImage>
+                                ></ItemImage> */}
                             </div>
                             <p className="font-display text-4xl p-4 border border-gray-600 border-t-0 ">
-                                {itemToClaim.metadata.name}
+                                {/* {itemToClaim.metadata.name} */}
                             </p>
                         </div>
                     </div>
                 </div>
-            </div> */}
+            </div>
         </>
     );
 };

@@ -38,7 +38,7 @@ const Profile = () => {
         <Dialog>
             <div className="p-4 lg:p-8">
                 <div className="p-8 lg:p-16 border rounded-2xl lg:rounded-full border-white flex justify-between items-center ">
-                    <div className="flex flex-col lg:flex-row lg:items-center gap-4 w-full">
+                    <div className="flex flex-col lg:flex-row lg:items-center gap-4 w-full lg:justify-between">
                         <div className="flex items-center gap-4 ">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

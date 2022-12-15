@@ -87,7 +87,7 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
                         <form onSubmit={onSubmitClaimForm}>
                             <div className="flex items-center w-full gap-4">
                                 <input
-                                    className={`w-1/3 h-14 rounded-md bg-[#1A1A1A] px-4 ${
+                                    className={`w-1/3 h-14 rounded-md bg-brand-black px-4 ${
                                         isClaimLoading
                                             ? " opacity-50 animate-pulse cursor-not-allowed "
                                             : ""
@@ -102,7 +102,7 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
                                 <button
                                     disabled={isClaimLoading}
                                     onClick={() => onClaim(quantity)}
-                                    className={` bg-[#1A1A1A] w-full h-14 rounded-md ${
+                                    className={` bg-brand-black w-full h-14 rounded-md ${
                                         isClaimLoading
                                             ? " opacity-50 animate-pulse cursor-not-allowed "
                                             : ""

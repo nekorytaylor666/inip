@@ -10,6 +10,9 @@ module.exports = {
                 sans: ["var(--font-inter)", ...fontFamily.sans],
                 display: ["var(--font-bad-russian)", ...fontFamily.serif],
             },
+            colors: {
+                "brand-black": "#1A1A1A",
+            },
         },
     },
     variants: {
