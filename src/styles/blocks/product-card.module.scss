@@ -1,0 +1,40 @@
+.product-card-screen{
+  margin-top: 40px;
+}
+
+.product-card-grid {
+  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  @media screen and (max-width: 420px) {
+      grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.product-card {
+  padding: 15px;
+  background: #1A1A1A;
+  border: 1px solid #1A1A1A;
+  border-radius: 8px;
+
+  &__title {
+    font-size: 36px;
+    max-width: 60%;
+    font-family: 'Bad', serif;
+    padding-bottom: 10px;
+    margin: 10px 0;
+    border-bottom: 0.5px solid #FFFFFF;
+
+    @media screen and (max-width: 420px) {
+      font-size: 24px;
+      max-width: 100%;
+    }
+  }
+
+  &__spec {
+    display: flex;
+    gap: 35px;
+  }
+}
