@@ -16,9 +16,11 @@ import { ItemImage } from "@components/item-image/item-image.component";
 import { HorizontalDivider } from "@components/divider/horizontal-divider.component";
 import { useClaimStore } from "src/store/claim.store";
 import { firebaseFirestore } from "src/core/firebase";
+import { NFT, SmartContract } from "@thirdweb-dev/sdk";
+import { BaseContract } from "ethers";
 
 const ClaimPage: NextPageWithLayout = () => {
-    const { itemToClaim } = useClaimStore();
+    const { itemToClaim, itemToClaimContract } = useClaimStore();
     if (!itemToClaim) {
         return (
             <div className="flex items-center justify-center h-full">
@@ -32,10 +34,21 @@ const ClaimPage: NextPageWithLayout = () => {
             </div>
         );
     }
-    return <ClaimFormContainer></ClaimFormContainer>;
+    return (
+        <ClaimFormContainer
+            item={itemToClaim}
+            contract={itemToClaimContract}
+        ></ClaimFormContainer>
+    );
 };
 
-const ClaimFormContainer = () => {
+interface ClaimFormContainerProps {
+    item: NFT;
+    contract: SmartContract<BaseContract>;
+}
+
+const ClaimFormContainer: React.FC<ClaimFormContainerProps> = (props) => {
+    const { item, contract } = props;
     const [isClaimLoading, setIsClaimLoading] = useState(false);
     return (
         <>
@@ -66,13 +79,13 @@ const ClaimFormContainer = () => {
                         </div>
                         <div className="">
                             <div className=" w-[450px] h-[500px]">
-                                {/* <ItemImage
-                                    src={itemToClaim.metadata.image}
+                                <ItemImage
+                                    src={item.metadata.image}
                                     alt="nft"
-                                ></ItemImage> */}
+                                ></ItemImage>
                             </div>
                             <p className="font-display text-4xl p-4 border border-gray-600 border-t-0 ">
-                                {/* {itemToClaim.metadata.name} */}
+                                {item.metadata.name}
                             </p>
                         </div>
                     </div>

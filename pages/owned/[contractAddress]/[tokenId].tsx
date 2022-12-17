@@ -56,7 +56,7 @@ const ItemPageActions: React.FC<ItemPageActionsProps> = (props) => {
 
     const buttonStyles = {
         regular:
-            "bg-brand-black transition-all duration-200 hover:opacity-70 w-full h-14 rounded-md",
+            "bg-brand-black transition-all duration-300 hover:bg-brand-orange w-full h-14 rounded-md",
         disabled: "bg-gray-600 w-full h-14 rounded-md cursor-not-allowed",
     };
 

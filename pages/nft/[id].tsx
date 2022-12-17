@@ -47,7 +47,7 @@ const ItemPageActions: React.FC<ItemPageActionsProps> = (props) => {
         item: NFT;
         contract: SmartContract<BaseContract>;
     }) => {
-        setItem({ item, itemContract: contract });
+        setItem({ item, itemContractAddress: contract.getAddress() });
         router.push("/checkout/");
     };
 
