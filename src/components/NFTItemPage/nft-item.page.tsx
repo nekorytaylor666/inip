@@ -10,26 +10,26 @@ import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { ItemImage } from "@components/item-image/item-image.component";
 import { useCartStore } from "src/store/cart.store";
 import { HorizontalDivider } from "@components/divider/horizontal-divider.component";
+import { NFT, SmartContract } from "@thirdweb-dev/sdk";
+import { BaseContract } from "ethers";
 
 interface NFTItemPageProps {
     contractAddress: string;
+    tokenId: string;
+    itemActions?: (props: {
+        item: NFT;
+        contract: SmartContract<BaseContract>;
+    }) => React.ReactNode;
 }
 
 const NFTItemPageComponent: React.FC<NFTItemPageProps> = (props) => {
-    const { contractAddress } = props;
-    const router = useRouter();
-    const tokenId = router.query.id as string;
+    const { contractAddress, tokenId, itemActions } = props;
     const { contract } = useContract(contractAddress);
     const { data: item, isLoading: isItemLoading } = useNFT(
         contract as any,
         tokenId,
     );
-    const { setItem } = useCartStore();
 
-    const onClaim = () => {
-        setItem({ item, itemContract: contract });
-        router.push("/checkout/");
-    };
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:divide-x lg:divide-gray-600 h-full">
             <div className="w-full pt-4 p-4 lg:px-8  flex flex-col">
@@ -37,29 +37,23 @@ const NFTItemPageComponent: React.FC<NFTItemPageProps> = (props) => {
                     src={item?.metadata.image}
                     alt="image_cover"
                 ></ItemImage>
-                <div className="pt-4">
-                    <button
-                        disabled={isItemLoading}
-                        onClick={() => onClaim()}
-                        className={`bg-brand-black w-full h-14 rounded-md`}
-                    >
-                        Купить
-                    </button>
-                </div>
+                {itemActions && itemActions({ item, contract: contract })}
             </div>
-            <ItemDetails contractAddress={contractAddress}></ItemDetails>
+            <ItemDetails
+                contractAddress={contractAddress}
+                tokenId={tokenId}
+            ></ItemDetails>
         </div>
     );
 };
 
 interface ItemDetailsProps {
     contractAddress: string;
+    tokenId: string;
 }
 
 const ItemDetails: React.FC<ItemDetailsProps> = (props) => {
-    const { contractAddress } = props;
-    const router = useRouter();
-    const tokenId = router.query.id as string;
+    const { contractAddress, tokenId } = props;
     const { contract } = useContract(contractAddress);
     const { data: item, isLoading: isItemLoading } = useNFT(
         contract as any,

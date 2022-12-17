@@ -13,15 +13,18 @@ import { HorizontalDivider } from "@components/divider/horizontal-divider.compon
 import NFTItemPageComponent from "@components/NFTItemPage/nft-item.page";
 import { NFT, SmartContract } from "@thirdweb-dev/sdk";
 import { BaseContract } from "ethers";
+import { useClaimStore } from "src/store/claim.store";
 
-const DreamItemPage: NextPageWithLayout = () => {
+const OwnedNFTItemPage: NextPageWithLayout = () => {
     const router = useRouter();
-    const tokenId = router.query.id as string;
+    const tokenId = router.query.tokenId as string;
+    const contractAddress = router.query.contractAddress as string;
+    console.log(contractAddress);
     return (
         <>
             <NFTItemPageComponent
                 tokenId={tokenId}
-                contractAddress={DREAMS_COME_TRUE_EDITION_ADDRESS}
+                contractAddress={contractAddress}
                 itemActions={(props) => (
                     <ItemPageActions {...props}></ItemPageActions>
                 )}
@@ -37,32 +40,56 @@ interface ItemPageActionsProps {
 
 const ItemPageActions: React.FC<ItemPageActionsProps> = (props) => {
     const { item, contract } = props;
-    const { setItem } = useCartStore();
+    const { setItemToClaim } = useClaimStore();
     const router = useRouter();
 
-    const onCheckout = ({
+    const onClaim = ({
         item,
         contract,
     }: {
         item: NFT;
         contract: SmartContract<BaseContract>;
     }) => {
-        setItem({ item, itemContract: contract });
-        router.push("/checkout/");
+        setItemToClaim({ item, itemContract: contract });
+        router.push("/claim/");
     };
 
+    const buttonStyles = {
+        regular:
+            "bg-brand-black transition-all duration-200 hover:opacity-70 w-full h-14 rounded-md",
+        disabled: "bg-gray-600 w-full h-14 rounded-md cursor-not-allowed",
+    };
+
+    const isButtonDisabled = !contract || !item;
+
     return (
-        <div className="pt-4">
+        <div className="pt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
             <button
-                onClick={() => onCheckout({ item, contract })}
-                className={`bg-brand-black w-full h-14 rounded-md`}
+                disabled={isButtonDisabled}
+                onClick={() => onClaim({ item, contract })}
+                className={
+                    isButtonDisabled
+                        ? buttonStyles.disabled
+                        : buttonStyles.regular
+                }
             >
-                Купить
+                Пожертвовать
+            </button>
+            <button
+                disabled={isButtonDisabled}
+                onClick={() => onClaim({ item, contract })}
+                className={
+                    isButtonDisabled
+                        ? buttonStyles.disabled
+                        : buttonStyles.regular
+                }
+            >
+                Забрать самому
             </button>
         </div>
     );
 };
 
-DreamItemPage.getLayout = DefaultLayout;
+OwnedNFTItemPage.getLayout = DefaultLayout;
 
-export default DreamItemPage;
+export default OwnedNFTItemPage;

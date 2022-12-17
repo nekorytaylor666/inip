@@ -19,6 +19,7 @@ import { HorizontalDivider } from "@components/divider/horizontal-divider.compon
 import { truncateString } from "src/utils/helpers";
 import { useMagicStore } from "src/store/magic.store";
 import { Dialog, DialogTrigger, DialogContent } from "@radix-ui/react-dialog";
+import { NFT } from "@thirdweb-dev/sdk";
 const Profile = () => {
     const walletAddress = useAddress();
     console.log(!!walletAddress);
@@ -34,6 +35,10 @@ const Profile = () => {
         contract,
         walletAddress,
     );
+
+    const createLinkFromNFTItem = (contractAddress, tokenId: string) => {
+        return `/owned/${contractAddress}/${tokenId}`;
+    };
     return (
         <Dialog>
             <div className="p-4 lg:p-8">
@@ -82,18 +87,25 @@ const Profile = () => {
                     )}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
                         {dreams?.map((item) => (
-                            <div className=" p-3 bg-black">
-                                <ItemImage
-                                    src={item.metadata.image}
-                                    alt={"nft-cover"}
-                                ></ItemImage>
-                                <p className="font-display text-lg mt-4">
-                                    Кол-во: {item.quantityOwned} шт.
-                                </p>
-                                <p className=" font-display text-2xl lg:text-5xl mt-4 ">
-                                    {item.metadata.name}
-                                </p>
-                            </div>
+                            <Link
+                                href={createLinkFromNFTItem(
+                                    DREAMS_COME_TRUE_EDITION_ADDRESS,
+                                    item.metadata.id,
+                                )}
+                            >
+                                <div className=" p-3 bg-black">
+                                    <ItemImage
+                                        src={item.metadata.image}
+                                        alt={"nft-cover"}
+                                    ></ItemImage>
+                                    <p className="font-display text-lg mt-4">
+                                        Кол-во: {item.quantityOwned} шт.
+                                    </p>
+                                    <p className=" font-display text-2xl lg:text-5xl mt-4 ">
+                                        {item.metadata.name}
+                                    </p>
+                                </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

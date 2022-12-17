@@ -18,8 +18,8 @@ import { useClaimStore } from "src/store/claim.store";
 import { firebaseFirestore } from "src/core/firebase";
 
 const ClaimPage: NextPageWithLayout = () => {
-    const { item, itemContract } = useCartStore();
-    if (!item) {
+    const { itemToClaim } = useClaimStore();
+    if (!itemToClaim) {
         return (
             <div className="flex items-center justify-center h-full">
                 <div className=" container max-w-5xl">
