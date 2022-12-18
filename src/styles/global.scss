@@ -4,6 +4,40 @@
 @import "@radix-ui/colors/purple.css";
 @import "@radix-ui/colors/violet.css";
 
+
+@import 'components/vars';
+@import 'components/mixins';
+@import 'components/classes';
+@import 'components/normalize';
+
+@import "fonts";
+
+// reset
+@import 'components/reset';
+@import 'components/default';
+
+// vendors
+@import 'vendor/swiper-bundle';
+@import 'vendor/aos';
+
+//components
+@import "components/title.module";
+
+// blocks
+@import "blocks/hero-screen.module";
+@import "blocks/button.module";
+@import "blocks/header.module";
+@import "blocks/card.module";
+@import "blocks/how-it-works-screen.module";
+@import "blocks/domino-horizontal.module";
+@import "blocks/product-card.module";
+@import "blocks/accordion.module";
+
+
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
     margin: 0;

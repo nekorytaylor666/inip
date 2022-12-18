@@ -1,0 +1,19 @@
+//@font-face {
+//  font-family: Bad-Russian Regular;
+//  src: url("/fonts/Bad-Russian_Regular.ttf") format('opentype');
+//}
+
+
+.title {
+  font-size: 48px;
+  text-align: center;
+
+  @media screen and (max-width: 420px) {
+      font-size: 36px;
+  }
+
+  &--bad-russian {
+
+    font-family: 'Bad', serif;
+  }
+}

@@ -1,0 +1,145 @@
+.card-screen {
+  margin-top: 40px;
+  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: flex-start;
+
+  @media screen and (max-width: 420px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+
+  @media screen and (max-width: 420px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.card {
+
+  border: 0.5px solid #5B5B5B;
+  border-radius: 8px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 420px) {
+    padding: 20px;
+  }
+
+  &__pretitle {
+    font-size: 24px;
+    font-weight: 400;
+    padding: 20px;
+
+    @media screen and (max-width: 420px) {
+      font-size: 18px;
+  }
+  }
+
+  &__img {
+    width: 100%;
+  }
+
+  &--without-space {
+    padding: 0;
+  }
+
+  &__long {
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  &__title {
+    font-size: 48px;
+    font-weight: 700;
+
+    @media screen and (max-width: 420px) {
+      font-size: 24px;
+    }
+
+  }
+
+  &__description {
+    font-size: 18px;
+    margin-top: 10px;
+
+    @media screen and (max-width: 420px) {
+      font-size: 16px;
+    }
+  }
+
+  &__info {
+    font-size: 20px;
+    border: 1px solid;
+    padding: 12px 30px;
+    border-radius: 600px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    @media screen and (max-width: 420px) {
+      display: none;
+    }
+  }
+
+  &__info--red {
+    border-color: #EC1E1E;
+    color: #EC1E1E;
+
+    & svg path {
+      fill: #EC1E1E;
+    }
+
+  }
+
+  &__info--green {
+    border-color: #7BFFB8;
+    color: #7BFFB8;
+
+    & svg path {
+      fill: #7BFFB8;
+    }
+  }
+}
+
+.card-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 40px;
+  gap: 10px;
+}
+
+.card-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+
+  &--large {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+  }
+
+  &__img {
+    width: 164px;
+  }
+
+  &__img--large {
+    width: 100%;
+  }
+
+  &__item {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
+}
