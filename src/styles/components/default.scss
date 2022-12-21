@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;700&display=swap');
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  color: $white3;
+  font-family: 'Inter Tight', sans-serif;
+  background: $black;
+
+  &.active-body {
+    overflow: hidden;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 36px;
+}
+
+a,
+button {
+  color: $white2;
+}
+
+.container {
+  max-width: 1310px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.mobile-hidden{
+  @media screen and (max-width: 420px) {
+    display: none;
+  }
+}
+
+
+
+.mobile-visible{
+  display: none;
+  @media screen and (max-width: 420px) {
+    display: block;
+  }
+}
