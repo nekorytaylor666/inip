@@ -13,7 +13,7 @@ import { CheckoutForm } from "@components/ClaimPage/claim-form.component";
 import { DefaultLayout } from "@components/layouts/defaultLayout";
 import dynamic from "next/dynamic";
 
-const NoSSRCheckoutFormContainer = dynamic(
+const NoSSRCheckoutFormContainer: any = dynamic(
     () => import("@components/checkout/checkout.container"),
     {
         ssr: false,

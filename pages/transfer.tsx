@@ -128,7 +128,7 @@ const ClaimFormContainer: React.FC<ClaimFormContainerProps> = (props) => {
         <>
             <div className="flex items-center justify-center h-full ">
                 <div className=" container max-w-5xl">
-                    <div className="w-full flex gap-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-8">
                         <form
                             onSubmit={handleSubmit(onSubmit)}
                             className="w-full"

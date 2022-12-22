@@ -89,7 +89,7 @@ const ItemPageActions: React.FC<ItemPageActionsProps> = (props) => {
             <button
                 disabled={true}
                 onClick={() => onClaim({ item, contract })}
-                className={true ? buttonStyles.disabled : buttonStyles.regular}
+                className={buttonStyles.disabled}
             >
                 Забрать самому
             </button>
