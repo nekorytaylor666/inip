@@ -14,6 +14,7 @@ import NFTItemPageComponent from "@components/NFTItemPage/nft-item.page";
 import { NFT, SmartContract } from "@thirdweb-dev/sdk";
 import { BaseContract } from "ethers";
 import { useClaimStore } from "src/store/claim.store";
+import { useTranferStore } from "src/store/transfer.store";
 
 const OwnedNFTItemPage: NextPageWithLayout = () => {
     const router = useRouter();
@@ -41,6 +42,7 @@ interface ItemPageActionsProps {
 const ItemPageActions: React.FC<ItemPageActionsProps> = (props) => {
     const { item, contract } = props;
     const { setItemToClaim } = useClaimStore();
+    const { setItemToTranfer } = useTranferStore();
     const router = useRouter();
 
     const onClaim = ({
@@ -50,10 +52,19 @@ const ItemPageActions: React.FC<ItemPageActionsProps> = (props) => {
         item: NFT;
         contract: SmartContract<BaseContract>;
     }) => {
-        setItemToClaim({ item, itemContract: contract });
+        setItemToClaim({ item, itemContractAddress: contract.getAddress() });
         router.push("/claim/");
     };
-
+    const onTransfer = ({
+        item,
+        contract,
+    }: {
+        item: NFT;
+        contract: SmartContract<BaseContract>;
+    }) => {
+        setItemToTranfer({ item, itemContractAddress: contract.getAddress() });
+        router.push("/transfer/");
+    };
     const buttonStyles = {
         regular:
             "bg-brand-black transition-all duration-300 hover:bg-brand-orange w-full h-14 rounded-md",
@@ -66,7 +77,7 @@ const ItemPageActions: React.FC<ItemPageActionsProps> = (props) => {
         <div className="pt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
             <button
                 disabled={isButtonDisabled}
-                onClick={() => onClaim({ item, contract })}
+                onClick={() => onTransfer({ item, contract })}
                 className={
                     isButtonDisabled
                         ? buttonStyles.disabled
@@ -76,13 +87,9 @@ const ItemPageActions: React.FC<ItemPageActionsProps> = (props) => {
                 Пожертвовать
             </button>
             <button
-                disabled={isButtonDisabled}
+                disabled={true}
                 onClick={() => onClaim({ item, contract })}
-                className={
-                    isButtonDisabled
-                        ? buttonStyles.disabled
-                        : buttonStyles.regular
-                }
+                className={true ? buttonStyles.disabled : buttonStyles.regular}
             >
                 Забрать самому
             </button>
