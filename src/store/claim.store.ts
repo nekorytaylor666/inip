@@ -1,20 +1,28 @@
 import { NFT, SmartContract } from "@thirdweb-dev/sdk";
 import create from "zustand";
+import { persist } from "zustand/middleware";
 
 type CartStoreState = {
     itemToClaim: NFT | null;
-    itemToClaimContract: SmartContract | null;
+    itemToClaimContractAddress: string | null;
     setItemToClaim: (payload: {
         item: NFT;
-        itemContract: SmartContract;
+        itemContractAddress: string;
     }) => void;
     resetClaim: () => void;
 };
 
 export const useClaimStore = create<CartStoreState>((set) => ({
     itemToClaim: null,
-    itemToClaimContract: null,
-    setItemToClaim: ({ item, itemContract }) =>
-        set({ itemToClaim: item, itemToClaimContract: itemContract }),
-    resetClaim: () => set({ itemToClaim: null, itemToClaimContract: null }),
+    itemToClaimContractAddress: null,
+    setItemToClaim: ({ item, itemContractAddress }) =>
+        set({
+            itemToClaim: item,
+            itemToClaimContractAddress: itemContractAddress,
+        }),
+    resetClaim: () =>
+        set({
+            itemToClaim: null,
+            itemToClaimContractAddress: null,
+        }),
 }));

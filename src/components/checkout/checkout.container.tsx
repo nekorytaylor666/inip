@@ -1,33 +1,15 @@
-import React from "react";
-import { useClaimConditions, useClaimNFT } from "@thirdweb-dev/react";
-import { NextPageWithLayout } from "./_app";
-import { DesktopNavbarComponent } from "@components/navbar/navbar";
-import styles from "./page.module.css";
-import { useCartStore } from "src/store/cart.store";
-import toast from "react-hot-toast";
 import { CheckoutForm } from "@components/ClaimPage/claim-form.component";
-import { DefaultLayout } from "@components/layouts/defaultLayout";
-
-const CheckoutPage: NextPageWithLayout = () => {
-    const { item, itemContract } = useCartStore();
-    if (!item) {
-        return (
-            <div className="flex items-center justify-center h-full">
-                <div className=" container max-w-5xl">
-                    <div className="w-full flex gap-4">
-                        <h1 className=" font-display text-6xl text-center">
-                            No Item
-                        </h1>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-    return <CheckoutFormContainer></CheckoutFormContainer>;
-};
+import {
+    useContract,
+    useClaimConditions,
+    useClaimNFT,
+} from "@thirdweb-dev/react";
+import toast from "react-hot-toast";
+import { useCartStore } from "src/store/cart.store";
 
 const CheckoutFormContainer = () => {
-    const { item, itemContract } = useCartStore();
+    const { item, itemContractAddress } = useCartStore();
+    const { contract: itemContract } = useContract(itemContractAddress);
     const { data: claimConditions, isLoading: isClaimConditionsLoading } =
         useClaimConditions(itemContract, item.metadata.id);
 
@@ -62,7 +44,19 @@ const CheckoutFormContainer = () => {
             toast("Ошибка, попробуйте еще раз.");
         }
     };
-
+    if (!item) {
+        return (
+            <div className="flex items-center justify-center h-full">
+                <div className=" container max-w-5xl">
+                    <div className="w-full flex gap-4">
+                        <h1 className=" font-display text-6xl text-center">
+                            No Item
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        );
+    }
     return (
         <>
             <CheckoutForm
@@ -76,6 +70,4 @@ const CheckoutFormContainer = () => {
     );
 };
 
-CheckoutPage.getLayout = DefaultLayout;
-
-export default CheckoutPage;
+export default CheckoutFormContainer;
