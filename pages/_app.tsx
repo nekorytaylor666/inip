@@ -39,7 +39,7 @@ const inter = Inter({
     variable: "--font-inter",
 });
 const badRussian = localFont({
-    src: "../public/font/Bad-Russian_Regular.otf",
+    src: "../public/font/Bad-Russian-Regular.woff2",
     weight: "400",
     style: "normal",
     variable: "--font-bad-russian",

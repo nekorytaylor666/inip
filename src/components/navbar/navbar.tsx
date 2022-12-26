@@ -135,23 +135,6 @@ interface ListItemProps {
     children?: React.ReactNode;
     title: string;
 }
-const ListItemButton: React.FC<ListItemProps & { onClick: () => void }> = ({
-    title,
-    children,
-    onClick,
-}) => (
-    <li>
-        <NavigationMenu.Link asChild>
-            <>
-                <button onClick={onClick}>
-                    <div className="ListItemHeading">{title}</div>
-
-                    {children && <p className="ListItemText">{children}</p>}
-                </button>
-            </>
-        </NavigationMenu.Link>
-    </li>
-);
 
 const ListItem = React.forwardRef(
     (

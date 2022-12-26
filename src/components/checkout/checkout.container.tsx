@@ -1,4 +1,4 @@
-import { CheckoutForm } from "@components/ClaimPage/claim-form.component";
+import { CheckoutForm } from "@components/checkout/checkout-form.component";
 import {
     useContract,
     useClaimConditions,

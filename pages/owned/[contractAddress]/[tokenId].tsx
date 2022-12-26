@@ -87,9 +87,13 @@ const ItemPageActions: React.FC<ItemPageActionsProps> = (props) => {
                 Пожертвовать
             </button>
             <button
-                disabled={true}
+                disabled={isButtonDisabled}
                 onClick={() => onClaim({ item, contract })}
-                className={buttonStyles.disabled}
+                className={
+                    isButtonDisabled
+                        ? buttonStyles.disabled
+                        : buttonStyles.regular
+                }
             >
                 Забрать самому
             </button>
