@@ -88,52 +88,64 @@ const HomePage: NextPageWithLayout = () => {
                 <div className="tab">
                     <input type="checkbox" id="chck1" />
                     <label className="tab-label" htmlFor="chck1">
-                        1. Что такое блокчейн?
+                        1. Что такое INIP?
                     </label>
                     <div className="tab-content">
-                        Мы воспользуемся наилучшими технологиями, чтобы дать
-                        рынку совершенно новые инженерные решения в разных
-                        сферах жизни
+                        INIP, или In One Percent - В одном проценте людей, кто
+                        готов привносить миру наибольшую пользу. Сообщество,
+                        созданное для объединения личностей, готовых изменять
+                        мир, улучшать его и творить историю.
                     </div>
                 </div>
                 <div className="tab">
                     <input type="checkbox" id="chck2" />
                     <label className="tab-label" htmlFor="chck2">
-                        2. Что такое USDT?
+                        2. Что такое блокчейн?
                     </label>
                     <div className="tab-content">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Ipsum, reiciendis!
+                        Представьте базу данных в виде бесконечной нерушимой
+                        цепи, где данные остаются навсегда неизменными и
+                        доступными для любого желающего. Именно через эту
+                        технологию мы добиваемся полной прозрачности
+                        пожертвований.
                     </div>
                 </div>
                 <div className="tab">
                     <input type="checkbox" id="chck3" />
                     <label className="tab-label" htmlFor="chck3">
-                        3. Что такое NFT?
+                        3. Чем INIP лучше от обычного благотворительного фонда?{" "}
                     </label>
                     <div className="tab-content">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Ipsum, reiciendis!
+                        Мы не централизируем пожертвования. Выступая как
+                        маркетплейс, мы предоставляем людям решение проблемы, а
+                        не финансы. У нас есть отчетности, которые невозможно
+                        подделать. Через нас филантроп способен проследить
+                        каждый процесс реализации помощи.
                     </div>
                 </div>
                 <div className="tab">
                     <input type="checkbox" id="chck4" />
                     <label className="tab-label" htmlFor="chck4">
-                        4. Почему мы используем блокчейн?
+                        4. Как мне начать?{" "}
                     </label>
                     <div className="tab-content">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Ipsum, reiciendis!
+                        Создайте себе крипто-кошелек. Если он у вас есть,
+                        привяжите его к нашей платформе. Выберите NFT-товар.
+                        Выберите нуждающегося. Подарите ему NFT-товар. Готово!
+                        Осталось наблюдать за процессом реализации помощи, а под
+                        конец получить благодарственное NFT!
                     </div>
                 </div>
                 <div className="tab">
                     <input type="checkbox" id="chck5" />
                     <label className="tab-label" htmlFor="chck5">
-                        5. Как мы добиваемся полной прозрачности?
+                        5. Где мне найти INIP?{" "}
                     </label>
                     <div className="tab-content">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Ipsum, reiciendis!
+                        Мы есть в социальных сетях!<br></br> Instagram: @inip.kz{" "}
+                        <br></br>
+                        Telegram: @inonepercent <br></br>Whitepaper:
+                        docs.inip.io
                     </div>
                 </div>
             </div>
