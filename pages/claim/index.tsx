@@ -1,11 +1,17 @@
-import ClaimFormPage from "@components/claim/claim-form.component";
 import { DefaultLayout } from "@components/layouts/defaultLayout";
+import dynamic from "next/dynamic";
 import React from "react";
 
+const NoSSRClaimPage: any = dynamic(
+    () => import("@components/claim/claim-form.component"),
+    {
+        ssr: false,
+    },
+);
 const ClaimPage = () => {
     return (
         <div>
-            <ClaimFormPage></ClaimFormPage>
+            <NoSSRClaimPage></NoSSRClaimPage>
         </div>
     );
 };
