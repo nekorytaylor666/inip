@@ -51,10 +51,7 @@ const ClaimFormContainer = () => {
             <h1 className=" font-display text-7xl lg:text-8xl">
                 Обмен на товар
             </h1>
-            <p className="mt-4 text-base lg:text-lg w-full lg:w-4/5">
-                Доставка товара осуществляется партнером «Арбуз». <br></br>
-                Телефон: +7 707 132 23 23 <br></br> What’s App: +7 707 132 23 23
-            </p>
+
             <HorizontalDivider className="my-8"></HorizontalDivider>
 
             <ClaimForm
