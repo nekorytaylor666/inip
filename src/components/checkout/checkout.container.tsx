@@ -4,7 +4,9 @@ import {
     useClaimConditions,
     useClaimNFT,
 } from "@thirdweb-dev/react";
+import axios from "axios";
 import toast from "react-hot-toast";
+import { useQuery } from "react-query";
 import { useCartStore } from "src/store/cart.store";
 
 const CheckoutFormContainer = () => {
@@ -14,6 +16,13 @@ const CheckoutFormContainer = () => {
         useClaimConditions(itemContract, item.metadata.id);
 
     const lastClaimCondition = claimConditions?.[claimConditions.length - 1];
+
+    const { data: coinMarketData } = useQuery(["crypto-rates"], async () => {
+        const res = await axios.get(
+            "https://api.coingecko.com/api/v3/coins/matic-network?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false",
+        );
+        return res.data.market_data;
+    });
 
     const {
         mutateAsync: claim,
@@ -60,6 +69,7 @@ const CheckoutFormContainer = () => {
     return (
         <>
             <CheckoutForm
+                coinMarketData={coinMarketData}
                 claimCondition={lastClaimCondition}
                 onClaim={onClaim}
                 isClaimLoading={isClaimLoading}

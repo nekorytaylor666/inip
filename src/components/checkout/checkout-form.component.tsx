@@ -12,6 +12,7 @@ interface ClaimFormProps {
     isClaimConditionsLoading: boolean;
     claimCondition: ClaimCondition;
     item: NFT;
+    coinMarketData: any;
 }
 
 export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
@@ -21,11 +22,13 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
         onClaim,
         isClaimConditionsLoading,
         claimCondition,
+        coinMarketData,
     } = props;
     const currencyIcon =
         !isClaimConditionsLoading &&
         CRYPTO_ICONS[claimCondition.currencyMetadata.symbol as AvailableCoins];
-
+    const coinPriceUSD: number | undefined = coinMarketData?.current_price.usd;
+    console.log(coinPriceUSD, parseFloat(coinPriceUSD?.toFixed(3)));
     const { register, handleSubmit, control } = useForm();
     const quantity = useWatch({
         control,
@@ -43,29 +46,53 @@ export const CheckoutForm = (props: ClaimFormProps): JSX.Element => {
         }
 
         return (
-            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
-                <div className="flex gap-4 items-center">
-                    <img
-                        className="h-12 w-12 lg:w-16 lg:h-16"
-                        src={currencyIcon}
-                        alt="currency"
-                    />
-                    <span className=" text-base w-full lg:text-2xl">
-                        Цена покупки
+            <div>
+                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
+                    <div className="flex gap-4 items-center">
+                        <img
+                            className="h-12 w-12 lg:w-16 lg:h-16"
+                            src={currencyIcon}
+                            alt="currency"
+                        />
+                        <span className=" text-base w-full lg:text-2xl">
+                            Цена покупки
+                        </span>
+                    </div>
+                    <span className="text-6xl  font-display uppercase">
+                        {quantity &&
+                            ethers.utils.formatUnits(
+                                claimCondition.price.mul(
+                                    ethers.BigNumber.from(quantity),
+                                ),
+                                claimCondition.currencyMetadata.decimals,
+                            )}
+                        <span className=" ml-4">
+                            {claimCondition.currencyMetadata.symbol}
+                        </span>
                     </span>
                 </div>
-                <span className="text-6xl  font-display uppercase">
-                    {quantity &&
-                        ethers.utils.formatUnits(
-                            claimCondition.price.mul(
-                                ethers.BigNumber.from(quantity),
-                            ),
-                            claimCondition.currencyMetadata.decimals,
-                        )}
-                    <span className=" ml-4">
-                        {claimCondition.currencyMetadata.symbol}
+                <div className="text-2xl flex justify-between items-center text-gray-400 mt-4">
+                    <span className="">Цена в USD:</span>
+                    <span className="font-display text-4xl">
+                        {quantity &&
+                            coinPriceUSD &&
+                            ethers.utils.formatUnits(
+                                claimCondition?.price
+                                    .mul(
+                                        ethers.BigNumber.from(
+                                            parseFloat(
+                                                (
+                                                    coinPriceUSD * quantity
+                                                ).toFixed(2),
+                                            ) * 1000,
+                                        ),
+                                    )
+                                    .div(ethers.BigNumber.from(1000)),
+                                claimCondition.currencyMetadata.decimals,
+                            )}
+                        $
                     </span>
-                </span>
+                </div>
             </div>
         );
     };

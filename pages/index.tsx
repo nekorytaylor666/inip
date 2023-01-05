@@ -113,7 +113,7 @@ const HomePage: NextPageWithLayout = () => {
                 <div className="tab">
                     <input type="checkbox" id="chck3" />
                     <label className="tab-label" htmlFor="chck3">
-                        3. Чем INIP лучше от обычного благотворительного фонда?{" "}
+                        3. Чем решение INIP лучше для пожертвований?
                     </label>
                     <div className="tab-content">
                         Мы не централизируем пожертвования. Выступая как
