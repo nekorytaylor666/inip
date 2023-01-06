@@ -1,6 +1,6 @@
 import { DefaultLayout } from "@components/layouts/defaultLayout";
 import { useClaimConditions, useContract, useNFT } from "@thirdweb-dev/react";
-import  { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 import React from "react";
 import { DREAMS_COME_TRUE_EDITION_ADDRESS } from "src/utils/const";
