@@ -50,7 +50,7 @@ const CheckoutFormContainer = () => {
                 },
             );
         } catch (e: any) {
-            toast("Ошибка, попробуйте еще раз.");
+            toast("Недостаточно средств! Пополните кошелек.");
         }
     };
     if (!item) {

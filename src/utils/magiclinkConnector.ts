@@ -12,5 +12,6 @@ export const magicLinkWalletConnector = new MagicConnector({
             [ChainId.Polygon]:
                 "https://polygon-mainnet.g.alchemy.com/v2/c6ihPOtMZN5GxE2yTkKMJrIAMgkOmCJ-",
         },
+        doNotAutoConnect: true,
     },
 });
